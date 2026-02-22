@@ -12,11 +12,11 @@ type MessageMaker struct {
 }
 
 type MessageMakerConfig struct {
-	Link string
+	Link string `yaml:"Link"`
 
-	SendPhrase  string
-	RightPhrase string
-	WrongPhrase string
+	SendPhrase  string `yaml:"SendPhrase"`
+	RightPhrase string `yaml:"RightPhrase"`
+	WrongPhrase string `yaml:"WrongPhrase"`
 }
 
 func NewMessageMaker(cfg *MessageMakerConfig) *MessageMaker {

@@ -19,12 +19,12 @@ type UpdateHandler struct {
 }
 
 type UpdateHandlerConfig struct {
-	WorkersNum      int
-	WaitingTime     time.Duration
-	UpdatesChanSize int
+	WorkersNum      int           `yaml:"WorkersNum"`
+	WaitingTime     time.Duration `yaml:"WaitingTime"`
+	UpdatesChanSize int           `yaml:"UpdatesChanSize"`
 
-	Phrase          string
-	MsgsMakerConfig *MessageMakerConfig
+	Phrase          string              `yaml:"Phrase"`
+	MsgsMakerConfig *MessageMakerConfig `yaml:"MessageMakerConfig"`
 }
 
 func NewUpdateHandler(cfg *UpdateHandlerConfig, token string) *UpdateHandler {
@@ -55,9 +55,7 @@ func (h *UpdateHandler) HandleAllUpdates() {
 		}()
 	}
 
-	var waitingTime time.Duration
 	for update := range updates {
-		waitingTime = 0
 		processed := false
 		for !processed {
 			select {
@@ -65,7 +63,6 @@ func (h *UpdateHandler) HandleAllUpdates() {
 				processed = true
 			default:
 				time.Sleep(h.cfg.WaitingTime)
-				waitingTime += h.cfg.WaitingTime
 				continue
 			}
 		}

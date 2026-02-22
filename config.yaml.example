@@ -1,0 +1,13 @@
+# Num of workers
+WorkersNum: 20
+# If the bot is overloaded, the worker takes a delay of this duration
+WaitingTime: 2s
+# Size of updates chan buffer
+UpdatesChanSize: 40
+# Phrase to get link. Case-insensitive
+Phrase: "test_phrase"
+MessageMakerConfig:
+  Link:        "https://t.me/test_link"
+  SendPhrase:  "Я ожидаю твоего слова"
+  RightPhrase: "Ты оказался прав, вот то, что я обещал "
+  WrongPhrase: "я постараюсь забыть это"
