@@ -9,8 +9,15 @@ import (
 )
 
 func StartUpdateHandler(pathToConfig string, token string) {
+	cfg := parseConfig(pathToConfig)
+	if phrase := os.Getenv("PHRASE"); phrase != "" {
+		cfg.Phrase = phrase
+	}
+	if link := os.Getenv("LINK"); link != "" {
+		cfg.MsgsMakerConfig.Link = link
+	}
 	handler := services.NewUpdateHandler(
-		parseConfig(pathToConfig),
+		cfg,
 		token,
 	)
 	handler.HandleAllUpdates()
@@ -20,7 +27,7 @@ func parseConfig(pathToConfig string) *services.UpdateHandlerConfig {
 	file, err := os.ReadFile(pathToConfig)
 	if err != nil {
 		fmt.Printf("Error while parsing configs: %s", err.Error())
-		os.Exit(1)
+		return services.GetDefaultUpdateHandlerConfig()
 	}
 	var config *services.UpdateHandlerConfig = &services.UpdateHandlerConfig{}
 	err = yaml.Unmarshal(file, config)

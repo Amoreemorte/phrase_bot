@@ -27,6 +27,21 @@ type UpdateHandlerConfig struct {
 	MsgsMakerConfig *MessageMakerConfig `yaml:"MessageMakerConfig"`
 }
 
+func GetDefaultUpdateHandlerConfig() *UpdateHandlerConfig {
+	return &UpdateHandlerConfig{
+		WorkersNum:      20,
+		WaitingTime:     time.Second * 2,
+		UpdatesChanSize: 40,
+		Phrase:          "test_phrase",
+		MsgsMakerConfig: &MessageMakerConfig{
+			Link:        "https://t.me/test_link",
+			SendPhrase:  "Я ожидаю твоего слова",
+			RightPhrase: "Ты оказался прав, вот то, что я обещал ",
+			WrongPhrase: "я постараюсь забыть это",
+		},
+	}
+}
+
 func NewUpdateHandler(cfg *UpdateHandlerConfig, token string) *UpdateHandler {
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
