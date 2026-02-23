@@ -29,6 +29,9 @@ func parseConfig(pathToConfig string) *services.UpdateHandlerConfig {
 		fmt.Printf("Error while parsing configs: %s", err.Error())
 		return services.GetDefaultUpdateHandlerConfig()
 	}
+	if len(file) == 0 {
+		return services.GetDefaultUpdateHandlerConfig()
+	}
 	var config *services.UpdateHandlerConfig = &services.UpdateHandlerConfig{}
 	err = yaml.Unmarshal(file, config)
 	if err != nil {
