@@ -35,16 +35,18 @@ cp config.yaml.example config.yaml
 3. Build and run with Docker
 ```bash
 # Build the Docker image
-docker build -t phraser_bot:latest .
+docker build --build-arg USE_EXAMPLE=true -t phraser_bot:latest .
 
 # Run the container
 docker run --rm -e TOKEN="YOUR_BOT_TOKEN" -e PHRASE="YOUR_PHRASE" -e LINK="YOUR_LINK" phraser_bot
 ```
 ## Environment Variables
-Variable	Description	            Required
-TOKEN	    Telegram Bot API token	Yes
-PHRASE    Phrase to check         No
-LINK      Link to send            No
+|Variable	  |Description	                    |Required|
+|-----------|---------------------------------|--------|
+|TOKEN      |Telegram Bot API token	          |Yes     |
+|PHRASE     |Phrase to check                  |No      |
+|LINK       |Link to send                     |No      |
+|USE_EXAMPLE|Config.yaml makes from example   |No      |
 
 ## Configuration File (config.yaml)
 ```yaml

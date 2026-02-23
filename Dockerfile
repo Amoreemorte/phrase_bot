@@ -1,9 +1,11 @@
 FROM golang AS builder
 WORKDIR /app
 COPY . .
+ARG USE_EXAMPLE
 
 RUN go mod download  
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bot ./cmd
+RUN if [ "$USE_EXAMPLE" = "true" ]; then cp /app/config.yaml.example /app/config.yaml; fi;
 
 FROM alpine:latest
 WORKDIR /app 
