@@ -1,7 +1,9 @@
 # Phraser Bot
 # Description
 
-    **Phraser Bot** is a Telegram bot that validates user messages against predefined phrases. Upon receiving a correct phrase,the bot responds with a corresponding link; incorrect phrases trigger an error message.
+  **Phraser Bot** is a Telegram bot that validates user messages against predefined phrases. Upon receiving a correct phrase, the bot responds with a corresponding link; incorrect phrases trigger an error message.
+
+  The bot implements a strictly utilitarian function: providing access to a link based on keyword verification.
 
 # Features
 - **Concurrent Update Processing**: Implements a worker pool pattern for handling Telegram updates, ensuring the bot remains responsive under high load by distributing requests across multiple goroutines
